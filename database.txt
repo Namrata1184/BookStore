@@ -1,0 +1,36 @@
+use book_store;
+
+create table customers(
+id number(4) primary key auto increment ,
+name varchar(50) not null unique,
+address varchar(150) not null,
+email varchar(50) unique,
+password varchar(20) unique,
+mob_no number(10) not null unique
+);
+
+create table books(
+book_id number(4) primary key,
+book_name varchar(20) not null unique,
+price number(6,2),
+publisher varchar(10),
+author varchar(20) not null
+);
+
+create table orders
+( ord_id   number(5)  primary key,
+   customer_id  number(5)  references customers(id),
+   ord_date  date,
+   status char(1)
+);
+
+create table order_details(
+book_id number(4) references books(book_id),
+ordid   number(5) references orders(ord_id),
+Quantity number(15),
+primary key(ordid,book_id)
+);
+
+insert into customers 
+values(1,'scott','12-2-23,Dwarakanagar,VSP-16','scott@hotmail.com',,
+'3434343');
